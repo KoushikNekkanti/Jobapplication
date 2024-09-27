@@ -1,0 +1,159 @@
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- Internal CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #resume-upload {
+            display: none;
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>User Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <h2>Welcome to Your Dashboard</h2>
+        <div class="options">
+            <button onclick="showUserProfile()">User Profile</button>
+            <button onclick="applyForJob()">Apply for Jobs</button>
+            <button onclick="reviewApplications()">Review Applied Applications</button>
+            <button onclick="uploadResume()">Upload Resume</button>
+        </div>
+
+        <!-- Sections to display on click -->
+        <div id="profile-section" style="display: none;">
+            <h3>Your Profile</h3>
+            <p>Name: John Doe</p>
+            <p>Email: john.doe@example.com</p>
+            <p>Position: Software Engineer</p>
+        </div>
+
+        <div id="apply-section" style="display: none;">
+            <h3>Apply for Jobs</h3>
+            <p>Search for your desired job and apply online!</p>
+            <button>Search Jobs</button>
+        </div>
+
+        <div id="review-section" style="display: none;">
+            <h3>Review Applied Applications</h3>
+            <ul>
+                <li>Application 1: Software Developer at XYZ Corp (Status: Pending)</li>
+                <li>Application 2: Backend Engineer at ABC Ltd (Status: Interview Scheduled)</li>
+            </ul>
+        </div>
+
+        <div id="resume-upload">
+            <h3>Upload Resume</h3>
+            <form>
+                <input type="file" id="resumeFile" accept=".pdf,.doc,.docx" required>
+                <button type="button" onclick="uploadFile()">Upload</button>
+            </form>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <!-- Internal JavaScript for interactive behavior -->
+    <script>
+        // Functions to show/hide sections based on user choice
+        function showUserProfile() {
+            hideAllSections();
+            document.getElementById('profile-section').style.display = 'block';
+        }
+
+        function applyForJob() {
+            hideAllSections();
+            document.getElementById('apply-section').style.display = 'block';
+        }
+
+        function reviewApplications() {
+            hideAllSections();
+            document.getElementById('review-section').style.display = 'block';
+        }
+
+        function uploadResume() {
+            hideAllSections();
+            document.getElementById('resume-upload').style.display = 'block';
+        }
+
+        function hideAllSections() {
+            document.getElementById('profile-section').style.display = 'none';
+            document.getElementById('apply-section').style.display = 'none';
+            document.getElementById('review-section').style.display = 'none';
+            document.getElementById('resume-upload').style.display = 'none';
+        }
+
+        // Function to simulate resume upload
+        function uploadFile() {
+            var fileInput = document.getElementById('resumeFile');
+            var file = fileInput.files[0];
+
+            if (file) {
+                document.getElementById('result').innerHTML = "Resume '" + file.name + "' uploaded successfully!";
+            } else {
+                document.getElementById('result').innerHTML = "No file selected.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard</title>
+    <!-- Internal CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0069D9;
+        }
+
+        #post-job, #review-applications, #dm-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        input[type="text"], textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        #result {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Recruiter Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <h2>Welcome, Recruiter</h2>
+
+        <!-- Action buttons for recruiter -->
+        <div class="options">
+            <button onclick="postNewJob()">Post a New Job</button>
+            <button onclick="reviewApplications()">Review Applications</button>
+            <button onclick="sendDM()">Send Direct Message (DM)</button>
+        </div>
+
+        <!-- Post a new job section -->
+        <div id="post-job">
+            <h3>Post a New Job Opening</h3>
+            <form id="job-form">
+                <input type="text" id="job-title" placeholder="Job Title" required><br>
+                <input type="text" id="company-name" placeholder="Company Name" required><br>
+                <textarea id="job-description" placeholder="Job Description" required></textarea><br>
+                <button type="button" onclick="submitJob()">Post Job</button>
+            </form>
+            <div id="job-result"></div>
+        </div>
+
+        <!-- Review applications section -->
+        <div id="review-applications">
+            <h3>Review Submitted Applications</h3>
+            <ul>
+                <li>John Doe - Applied for Software Engineer (Status: Pending)</li>
+                <li>Jane Smith - Applied for Data Scientist (Status: Interview Scheduled)</li>
+                <li>Robert Brown - Applied for Backend Developer (Status: Rejected)</li>
+            </ul>
+        </div>
+
+        <!-- Send direct message section -->
+        <div id="dm-section">
+            <h3>Send Direct Message to Candidate</h3>
+            <form id="dm-form">
+                <input type="text" id="candidate-name" placeholder="Candidate Name" required><br>
+                <textarea id="dm-message" placeholder="Your Message" required></textarea><br>
+                <button type="button" onclick="sendMessage()">Send Message</button>
+            </form>
+            <div id="dm-result"></div>
+        </div>
+
+    </div>
+
+    <!-- Internal JavaScript to manage sections and actions -->
+    <script>
+        // Functions to show/hide sections
+        function postNewJob() {
+            hideAllSections();
+            document.getElementById('post-job').style.display = 'block';
+        }
+
+        function reviewApplications() {
+            hideAllSections();
+            document.getElementById('review-applications').style.display = 'block';
+        }
+
+        function sendDM() {
+            hideAllSections();
+            document.getElementById('dm-section').style.display = 'block';
+        }
+
+        function hideAllSections() {
+            document.getElementById('post-job').style.display = 'none';
+            document.getElementById('review-applications').style.display = 'none';
+            document.getElementById('dm-section').style.display = 'none';
+        }
+
+        // Function to handle job posting
+        function submitJob() {
+            var jobTitle = document.getElementById('job-title').value;
+            var companyName = document.getElementById('company-name').value;
+            var jobDescription = document.getElementById('job-description').value;
+
+            if (jobTitle && companyName && jobDescription) {
+                document.getElementById('job-result').innerHTML = 
+                    "Job '" + jobTitle + "' at '" + companyName + "' posted successfully!";
+            } else {
+                document.getElementById('job-result').innerHTML = "Please fill out all fields.";
+            }
+        }
+
+        // Function to handle sending DM
+        function sendMessage() {
+            var candidateName = document.getElementById('candidate-name').value;
+            var message = document.getElementById('dm-message').value;
+
+            if (candidateName && message) {
+                document.getElementById('dm-result').innerHTML = 
+                    "Message sent to '" + candidateName + "' successfully!";
+            } else {
+                document.getElementById('dm-result').innerHTML = "Please fill out all fields.";
+            }
+        }
+    </script>
+
+</body>
+</html>
